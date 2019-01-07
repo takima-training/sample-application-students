@@ -9,3 +9,8 @@ before_install:
   - sudo service mysql stop
   - docker pull takimatraining/devops-training-db
   - docker run -d -p localhost:3306:3306 takimatraining/devops-training-db
+
+
+# Run Unit Test and Integration Tests
+script:
+  - mvn verify
