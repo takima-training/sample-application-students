@@ -13,3 +13,10 @@ before_install:
 # Run Unit Test and Integration Tests
 script:
   - mvn verify
+
+# 改进：由于每次运行build的时候，运行环境为全新
+# 所以Maven每次都要重复下载很多依赖包，为避免此情况，可以用缓存来解决
+# Cache the .m2 folder to prevent redownloading dependencies on each build
+cache:
+  directories:
+  - "$HOME/.m2/repository"
