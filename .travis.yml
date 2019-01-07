@@ -34,4 +34,4 @@ script:
     -Dsonar.projectKey=mbrgs_sample-application-students \
     -Dsonar.organization=mbrgs-github \
     -Dsonar.host.url=https://sonarcloud.io \
-    -Dsonar.login=$SONAR_TOKEN
+    -Dsonar.login=6889e1e684db6af5878ce58dc7005b7771544754
