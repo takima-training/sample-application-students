@@ -10,12 +10,11 @@ before_install:
 # The pipe (|) is useful to create multiline scripts
 script:
   - |
-     - mvn clean install sonar:sonar \
-     - Dsonar.projectKey=<SONAR_PROJECT_KEY> \
-     - Dsonar.organization=<SONAR_ORGANISATION_KEY> \
-     - Dsonar.host.url=https://sonarcloud.io \
-     - Dsonar.login=$SONAR_TOKEN
-
+     mvn sonar:sonar \
+     -Dsonar.projectKey=sampleApplicationStudents \
+     -Dsonar.organization=pcadorel-github \
+     -Dsonar.host.url=https://sonarcloud.io \
+     -Dsonar.login=token1
 cache:
   directories:
   - "$HOME/.m2/repository"
