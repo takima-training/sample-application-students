@@ -1,5 +1,5 @@
 language: java
-jdk: java-8-openjdk
+jdk: oraclejdk8
 
 # Define the services to use
 services:
