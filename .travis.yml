@@ -19,3 +19,19 @@ script:
 cache:
   directories:
   - "$HOME/.m2/repository"
+
+# Environment variables are strings (double quotes)
+# Example:
+# - secure: "DpR1th9rZvLMX0......"
+env:
+  global:
+     - secure: "ankWDSPnn4uTHIxm+FSZGcgaCXmK0dEU+ne0rgWhU+DhQ/l71DGBfRrn5vuvsXUApss1di2Wsj5tO6y9fIj7Vs0cUr3417K7ONuc6xwvRBhRfLxMMj5fJt4unCaejj+MweQ4oAJg2nMAH0EtR7Rut8YpLVYWovwXvFIGHYHAoC752rFZuMPDHnhapSd7+ZMdwYo1l7C2ZZOBbSm6Vh/Z9alQINIOqZ60UVSmCLMVV0erJrkqxikUxiSCdAeOt6T4xbrRPXiAMHzA5CKivCfLf+6QoXLd/1J1Mujj0wvneUiggI0Ty+02N+K/HmaJAe+jLjk72BGnd1AbAYDW1zoLgVPWKhrCJdhDkZ8Ori3lmarpvGIsTe9UOUAPclGaBNN08y6xzdS/C9FtSdy5+IcsgbaHceY5s4bJsHPcixAY0mq8EhFOyZzfEBJUp0LAelFA+1JpjtcfUhmkc5R+pQStLY+mp5mYteZtuiDfVPZemhGP0RIAe+gMZak/J8QNG92BPPR2eiZBxqVw3egdV++dKLrtBMJshRzMLGr7+i1I0SvtIXRapAaAtsatBfA8UXO8fZlBNzd5RfOCmRv4RCMc9+sbyyBSO3TQrWuIDHYX4gR/wIgsBxLaGEWenyuIXR3MFpEdxy/bUrJBwilwJZucmvgIrcPwuDgVSLYrghghpq8="
+
+# The pipe (|) is useful to create multiline scripts
+script:
+  - |
+    mvn clean install sonar:sonar \
+    -Dsonar.projectKey=<SONAR_PROJECT_KEY> \
+    -Dsonar.organization=<SONAR_ORGANISATION_KEY> \
+    -Dsonar.host.url=https://sonarcloud.io \
+    -Dsonar.login=$SONAR_TOKEN
