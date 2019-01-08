@@ -6,10 +6,6 @@ jdk: oraclejdk8
 services:
 - docker
 
-cache:
-  directories:
-  - "$HOME/.m2/repository"
-
 env: 
   global:
   - secure: gvjUGE8096ajp9GDlPyoJdwJ9EAmez/P0xpjTyNwdrge0+lwyykKMXv/q/a/a83kPZl8hNomzvWKWaOsptYVpgcl+Fruolqbl0bsRcIXKgGaQo5yETzr2TXBTgSzrKaDmhj6fybuMspd6cZLwfc6GNy5JLu1ANIUkrlwxGbh/6u2GbzawJW5CMQT93sf5r9gdtaQI8bIHph99W4tBeWHPQZnQghhM5rxMiVMXVEaQ58nZvl/4HiK+8GT4KWhvxlUX94TwKdYeMBUsr4TSoQeAf4BeB7WdREoXURVkzYcUp/fXh4VOHYKAYKbLNT3BFwEIwfUFlxGXaY0P5mKyYnA6+ULj/TX3UGQSJnIKvnQ6wxlCNoHEsO9pacIzi24HCULhCKu5b7FOYRSN0y3bID3Pb423rVRsJE0sr/JZHCveQJXkdTSIGKcdsLPhnCkLjdcWXou1zI26BD2etQ2UCcn3jLEguXo4vYkvqe+eBYoDjNWMlZNjcG8Lu6HCJyoWDNh89cmwHAON+YQrDVUpdSTfW3j5keCURXQXuNbHNZUpsLni72iBKyAJwU8LOvJE4Uu2/4DdBmZPFrEfMW0xrP21KWmFv3odpu9aPq13tIntgnNfkytbQ6TB6j9Qgd8uchinh+RmNAUm6tbmILAti+T7J71RMwv1Ir52aET0ZQ+yhE=
@@ -45,3 +41,6 @@ script:
 notifications:
   email:
     on_failure: always
+cache:
+  directories:
+  - "$HOME/.m2/repository"
