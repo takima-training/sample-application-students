@@ -9,7 +9,7 @@ before_install:
 - docker run -d -p 127.0.0.1:3306:3306 takimatraining/devops-training-db
 
 - openssl aes-256-cbc -K $encrypted_7033f886b6f6_key -iv $encrypted_7033f886b6f6_iv
-  -in travis_deploy_rsa.enc -out ~\/.ssh/travis_deploy_rsa -d
+  -in travis_deploy_rsa.enc -out ~/.ssh/travis_deploy_rsa -d
 
 script:
 - mvn verify
