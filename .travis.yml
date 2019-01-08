@@ -14,6 +14,16 @@ script:
   -Dsonar.organization=pcadorel-github \
   -Dsonar.host.url=https://sonarcloud.io \
   -Dsonar.login=22f8ee718db822f5161fad23048cf60ecca4a797
+#login to Docker hub
+- docker login -u $DOCKER_USER -p $DOCKER_PASS
+#tag text according to the branch
+- export TAG=`if [ "$TRAVIS_BRANCH" == "MASTER" ]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
+- export IMAGE_NAME=pcadorel/sample-application
+- docker build -t $IMAGE_NAME:$TRAVIS_COMMIT
+- docker tag $IMAGE_NAME:$TRAVIS_COMMIT $IMAGE_NAME:$TAG
+- docker push $IMAGE_NAME:$TAG
+
+
 cache:
   directories:
   - "$HOME/.m2/repository"
