@@ -18,7 +18,7 @@ script:
 - docker login -u $DOCKER_USER -p $DOCKER_PASS
 #tag text according to the branch
 - export TAG=`if [ "$TRAVIS_BRANCH" == "MASTER" ]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
-- export IMAGE_NAME=pcadorel/sample-application
+- export IMAGE_NAME=$DOCKER_USER/sample-application
 - docker build -t $IMAGE_NAME:$TRAVIS_COMMIT
 - docker tag $IMAGE_NAME:$TRAVIS_COMMIT $IMAGE_NAME:$TAG
 - docker push $IMAGE_NAME:$TAG
