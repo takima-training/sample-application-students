@@ -8,9 +8,19 @@ before_install:
 - docker pull takimatraining/devops-training-db
 - docker run -d -p 127.0.0.1:3306:3306 takimatraining/devops-training-db
 
+#prepare deploy
 - openssl aes-256-cbc -K $encrypted_7033f886b6f6_key -iv $encrypted_7033f886b6f6_iv
-  -in travis_deploy_rsa.enc -out ~/.ssh/travis_deploy_rsa -d
+  -in travis_deploy_rsa.enc -out /tmp/travis_deploy_rsa -d
+- eval "$(ssh-agent -s)"
+- ssh-add /tmp/travis_deploy_rsa
+- echo -e "Host $SERVER_HOST\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 
+deploy:
+  provider: script
+  script: ssh -i /tmp/travis_deploy_rsa $DEPLOY_USER@$SERVER_HOST "sudo docker pull $IMAGE_NAME:$TAG && sudo docker rm -f app || true && sudo docker run -d --network net -p 80:8080 --name app $IMAGE_NAME:$TAG"
+  on:
+    branch: master
+    
 script:
 - mvn verify
 - |
@@ -37,6 +47,8 @@ cache:
   - "$HOME/.m2/repository"
 
 env:
+  - DEPLOY_USER: training
+  - SERVER_HOST: paul-cadorel.takima.io
   global:
   - secure: Q8VmCTTexlQhOsq9rKrGshUCo/OfGMYkE85QEttUcZFEuSb5ybA2uONUT9Gm7XdbQCVU5VoScBdVlhK2pzZQJQDmeK4M/OVgPW6KR3Q/fE8/oNNnzMRABzrkLu7hOQLST67w2MnzV1WWDUIzMaVD0KF1h5pO/zWETimt06cikBOO3AwS/P8IfuUmv3OFsETAmjpvABfbhfVU+4tn7Si0cIzBRnkViWH0MTxkkVoNzf8Bbqrs6sJfVPgBCLQkO0ABHBa1uUUzRvx2jj+6HiaUHH5g3SDpKyBuzC5rXA//vfDuotoBxv0/oNDZx/oGbvVmWZd+aI9fuMiL/Mhdw4J36kUzGge1ANtsh/PhHqg1werzA4zc615OcYCyHSVsTqNCl/IwSmeEjVa8lqC7z0vcL/fXXP0WtMDDFmNqix4MDCnEj5TvaWXTSAVI7n7ppNS0KxqRoq7VskVyCRJWusKG696mGZ6Jvedhv6IDEXvF0wJOWJYdfe2PmI4S1u99gd6NGUwcyXUkUeO5MGGxQAWqOU3a7UPW6YhSKqt59sgBtBwhdnC+A8dBxl2SydQLKk4H9Q5TMSNAoctm0o15GJOoaK98cWOdyGA0FmsHTa4F7rNvWD+JIDjRC77l+/SuvODsO7RQAchvRF7iEEWkSHHSsKoMenehr66qKunoOObqO+I=
   - secure: GI5GroZI6nd4z8gOrH6m1EStUT7yuH4CxXNmHODPSysxKbiP0RXrkIog6toIWjT59Ip6f98Z5KEH6+9K6RWe4bYGOoqFObLjB0a84Ph1u234NwhabYnJzoU4uRBwik5FpZJmpKk4IDdm7ZLXc1zS6ffgTDIt1BwfiN01Qabn4+KBt98LBfySjtVKz3Sk+1VC5SXH8sYCcbkrROH/UZn5MKylB6yrI7qp5XFQHRSzmfEPA0+WL+1bcknaF8aJqTLNHz72ozSuih0HAjGY+3taw31pOcRasCWND7Cao/xXu/BsGzy/0oILf2HmV7+3kfYo7cQifMN9YYhT4L+467r7B9YGOpVZ5t6+Y/XCJ90lCf6RAqJJwjYBJmap/1SQgx1AJg0FR70rhPK29w485qgkYh8NJclSTsfhLGYOMLI6IICm0DA6ntnNntCvOoN02Pt0fm2IEtdhERM1ZJnkfrqf3nqAhcV4k7QyYAFK5KzfdILFG9hgqglTO46vTucDWCthDr/nUVXWjonidUGwxYUnwsicMqDiCM1wG//ROKbkuMCsqe71G9W1ttdElsclExt9UV9IRXN0erWBytUMuOZfw4jcsyrX6GxO6tN/JyBrFWTOx2JXLSiRthLcU2dFLYOMW5ueWNqv08qX4iMTRa2+MFWe7QOTG7Nr4HztZIsAjsc=
