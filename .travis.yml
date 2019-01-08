@@ -28,14 +28,19 @@ script:
   -Dsonar.organization=pcadorel-github \
   -Dsonar.host.url=https://sonarcloud.io \
   -Dsonar.login=22f8ee718db822f5161fad23048cf60ecca4a797
-- docker login -u $DOCKER_USER -p $DOCKER_PASS
-- export TAG=`if [ "$TRAVIS_BRANCH" == "MASTER" ]; then echo "latest"; else echo $TRAVIS_BRANCH;
-  fi`
-- export IMAGE_NAME=$DOCKER_USER/sample-application
-- docker build -t $IMAGE_NAME:$TRAVIS_COMMIT
-- docker tag $IMAGE_NAME:$TRAVIS_COMMIT $IMAGE_NAME:$TAG
-- docker push $IMAGE_NAME:$TAG
 
+# Login to Docker hub
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  # Tag text according to the branch
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
+  # Image name
+  - export IMAGE_NAME=takimatraining/sample-application
+  # Build the image (see Dockerfile) and tag it with the commit ID
+  - docker build -t $IMAGE_NAME:$TRAVIS_COMMIT .
+  # Retag the image with the previously choosen tag
+  - docker tag $IMAGE_NAME:$TRAVIS_COMMIT $IMAGE_NAME:$TAG
+  # Push the tagged image to Docker Hub
+  - docker push $IMAGE_NAME:$TAG
 
 notifications:
   email:
