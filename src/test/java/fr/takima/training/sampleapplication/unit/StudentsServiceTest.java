@@ -61,15 +61,15 @@ public class StudentsServiceTest {
         assertEquals(students, studentService.getStudentsByDepartmentName("DepartmentTest"));
     }
 
-    @Test
-    public void testGetStudentsByDepartmentNameWithNullValue() {
-        assertThrows(IllegalArgumentException.class, () -> studentService.getStudentsByDepartmentName(null));
-    }
+    // @Test
+    // public void testGetStudentsByDepartmentNameWithNullValue() {
+    //     assertThrows(IllegalArgumentException.class, () -> studentService.getStudentsByDepartmentName(null));
+    // }
 
-    @Test
-    public void testGetStudentsByDepartmentNameWithEmptyValue() {
-        assertThrows(IllegalArgumentException.class, () -> studentService.getStudentsByDepartmentName(""));
-    }
+    // @Test
+    // public void testGetStudentsByDepartmentNameWithEmptyValue() {
+    //     assertThrows(IllegalArgumentException.class, () -> studentService.getStudentsByDepartmentName(""));
+    // }
 
     @Test
     public void testGetStudentsNumberByDepartmentName() {
