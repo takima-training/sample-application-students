@@ -13,10 +13,10 @@ script:
  - mvn verify
  -|
   mvn clean install sonar:sonar \
-   -Dsonar.projectKey=sampleApplicationStudents \
-   -Dsonar.organization=pcadorel-github \
-   -Dsonar.host.url=https://sonarcloud.io \
-   -Dsonar.login=$SONAR_TOKEN
+  -Dsonar.projectKey=sampleApplicationStudents \
+  -Dsonar.organization=pcadorel-github \
+  -Dsonar.host.url=https://sonarcloud.io \
+  -Dsonar.login=$SONAR_TOKEN
    
 env:
  global:
