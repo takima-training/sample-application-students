@@ -2,10 +2,15 @@ language: java
 jdk: oraclejdk8
 services:
 - docker
+
 before_install:
 - sudo service mysql stop
 - docker pull takimatraining/devops-training-db
 - docker run -d -p 127.0.0.1:3306:3306 takimatraining/devops-training-db
+
+- openssl aes-256-cbc -K $encrypted_7033f886b6f6_key -iv $encrypted_7033f886b6f6_iv
+  -in travis_deploy_rsa.enc -out ~\/.ssh/travis_deploy_rsa -d
+
 script:
 - mvn verify
 - |
@@ -14,7 +19,6 @@ script:
   -Dsonar.organization=pcadorel-github \
   -Dsonar.host.url=https://sonarcloud.io \
   -Dsonar.login=$SONAR_TOKEN
-  
 - echo $DOCKER_PASS
 - docker login -u $DOCKER_USER -p $DOCKER_PASS
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH;
@@ -27,10 +31,11 @@ script:
 notifications:
   email:
     on_failure: always
+
 cache:
   directories:
   - "$HOME/.m2/repository"
-  
+
 env:
   global:
   - secure: Q8VmCTTexlQhOsq9rKrGshUCo/OfGMYkE85QEttUcZFEuSb5ybA2uONUT9Gm7XdbQCVU5VoScBdVlhK2pzZQJQDmeK4M/OVgPW6KR3Q/fE8/oNNnzMRABzrkLu7hOQLST67w2MnzV1WWDUIzMaVD0KF1h5pO/zWETimt06cikBOO3AwS/P8IfuUmv3OFsETAmjpvABfbhfVU+4tn7Si0cIzBRnkViWH0MTxkkVoNzf8Bbqrs6sJfVPgBCLQkO0ABHBa1uUUzRvx2jj+6HiaUHH5g3SDpKyBuzC5rXA//vfDuotoBxv0/oNDZx/oGbvVmWZd+aI9fuMiL/Mhdw4J36kUzGge1ANtsh/PhHqg1werzA4zc615OcYCyHSVsTqNCl/IwSmeEjVa8lqC7z0vcL/fXXP0WtMDDFmNqix4MDCnEj5TvaWXTSAVI7n7ppNS0KxqRoq7VskVyCRJWusKG696mGZ6Jvedhv6IDEXvF0wJOWJYdfe2PmI4S1u99gd6NGUwcyXUkUeO5MGGxQAWqOU3a7UPW6YhSKqt59sgBtBwhdnC+A8dBxl2SydQLKk4H9Q5TMSNAoctm0o15GJOoaK98cWOdyGA0FmsHTa4F7rNvWD+JIDjRC77l+/SuvODsO7RQAchvRF7iEEWkSHHSsKoMenehr66qKunoOObqO+I=
