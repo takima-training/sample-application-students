@@ -11,7 +11,8 @@ before_install:
 #prepare deploy
 - openssl aes-256-cbc -K $encrypted_7033f886b6f6_key -iv $encrypted_7033f886b6f6_iv
   -in travis_deploy_rsa.enc -out /tmp/travis_deploy_rsa -d
-  
+
+- chmod 600 /tmp/travis_deploy_rsa
 - eval "$(ssh-agent -s)"
 - ssh-add /tmp/travis_deploy_rsa
 - echo -e "Host $SERVER_HOST\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
