@@ -1,5 +1,13 @@
 language: java
-script: mvn clean verify
+script:
+  - mvn clean verify
+  - mvn package -DskipTests
+  - echo "$dockerhubpassword" | docker login -u "$dockerhublogin" --password-stdin
+
+  - docker build -t http sample-application-http-api-server
+  - docker build -t db sample-application-db-changelog-job
+  - docker push marinemllr/tp2:http
+  - docker push marinemllr/tp2:db
 cache:
   directories:
     - $HOME/.m2
