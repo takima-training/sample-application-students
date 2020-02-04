@@ -8,6 +8,7 @@ script:
   - docker build -t db sample-application-db-changelog-job
   - docker push marinemllr/tp2:http
   - docker push marinemllr/tp2:db
+
 cache:
   directories:
     - $HOME/.m2
