@@ -20,6 +20,10 @@ jobs:
         - docker push $dockerhublogin/tp2:http
         - docker push $dockerhublogin/tp2:db
 
+stages:
+  - name: deploy
+    if: branch = master
+
 cache:
   directories:
     - $HOME/.m2
