@@ -21,7 +21,8 @@ jobs:
         - docker push $dockerhublogin/tp2:db
 
 stages:
-  - name: deploy
+  - name: test
+  - name: build
     if: branch = master
 
 cache:
