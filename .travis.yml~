@@ -3,7 +3,7 @@ addons:
   sonarcloud:
     organization: "mrn73130"
     token:
-      secure: "**************************" # encrypted value of your token
+      secure: "612b2c04a8c86c7e953f5b32cbcbf7c245e7b436"
 
 script:
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
