@@ -2,3 +2,5 @@ language: java
 os: linux
 script:
   - mvn clean verify
+  - docker build -t api ./sample-application-http-api-server/
+  - docker build -t api ./sample-application-db-changelog-job/
