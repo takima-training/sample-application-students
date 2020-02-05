@@ -6,7 +6,7 @@ addons:
       secure: $tp2
 
 script:
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar -Dsonar.projectKey=MRN73130_sample-application-students
   - echo "$dockerhubpassword" | docker login -u "$dockerhublogin" --password-stdin
 
   - docker build -t http sample-application-http-api-server
