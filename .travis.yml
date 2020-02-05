@@ -1,7 +1,6 @@
 language: java
 script:
   - mvn clean verify
-  - mvn package -DskipTests
   - echo "$dockerhubpassword" | docker login -u "$dockerhublogin" --password-stdin
 
   - docker build -t http sample-application-http-api-server

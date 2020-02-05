@@ -6,6 +6,8 @@ script:
 
   - docker build -t http sample-application-http-api-server
   - docker build -t db sample-application-db-changelog-job
+  - docker tag http $dockerhublogin/tp2:http
+  - docker tag db $dockerhublogin/tp2:db
   - docker push $dockerhublogin/tp2:http
   - docker push $dockerhublogin/tp2:db
 
