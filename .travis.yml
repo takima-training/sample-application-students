@@ -1,6 +1,12 @@
 language: java
+addons:
+  sonarcloud:
+    organization: "mrn73130"
+    token:
+      secure: "612b2c04a8c86c7e953f5b32cbcbf7c245e7b436"
+
 script:
-  - mvn clean verify
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
   - echo "$dockerhubpassword" | docker login -u "$dockerhublogin" --password-stdin
 
   - docker build -t http sample-application-http-api-server
@@ -13,3 +19,4 @@ script:
 cache:
   directories:
     - $HOME/.m2
+
