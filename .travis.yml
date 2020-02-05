@@ -10,9 +10,9 @@ jobs:
     - stage: test
       script: 
         - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar -Dsonar.projectKey=MRN73130_sample-application-students
-        - echo "$dockerhubpassword" | docker login -u "$dockerhublogin" --password-stdin
     - stage: build
       script: 
+        - echo "$dockerhubpassword" | docker login -u "$dockerhublogin" --password-stdin
         - docker build -t http sample-application-http-api-server
         - docker build -t db sample-application-db-changelog-job
         - docker tag http $dockerhublogin/tp2:http
