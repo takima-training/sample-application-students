@@ -3,8 +3,7 @@ language: java
 addons:
   sonarcloud:
     organization: 'askemeline'
-    token:
-      secure: $SECRET_SECURE # encrypted value of your token
+    token: ${SECRET_SECURE} # encrypted value of your token
 
 script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
