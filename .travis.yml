@@ -7,7 +7,6 @@ stages:
 jobs:
   include:
     - stage: "Build and Test"
-      language: java
       jdk: oraclejdk11
       before_script:
         - cd sample-application-backend
