@@ -31,21 +31,21 @@ jobs:
         - cd sample-application-backend
       script:
         - echo "Docker build ..."
-        - docker-compose build -t trankilemil/tp02-java
+        - docker-compose build
         - echo "Docker login ..."
         - echo "$DOCKER_HUB_Password" | docker login -u "$DOCKER_HUB_Username" --password-stdin
         - echo "Docker push ..."
-        - docker push trankilemil/tp02-java
+        - docker-compose push
     - stage: "Package"
       before_script:
         - cd sample-application-frontend
       script:
         - echo "Docker build ..."
-        - docker-compose build -t trankilemil/tp02-node
+        - docker-compose build
         - echo "Docker login ..."
         - echo "$DOCKER_HUB_Password" | docker login -u "$DOCKER_HUB_Username" --password-stdin
         - echo "Docker push ..."
-        - docker push trankilemil/tp02-node
+        - docker-compose push
 cache:
   directories:
     - "$HOME/.m2/repository"
