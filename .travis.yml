@@ -8,7 +8,7 @@ jobs:
       before_script:
         - cd sample-application-backend
       script:
-        - ./mvn clean install
+        - mvn clean install
     - stage: "Build and Test Nodejs"
       language: node.js
       node_js: "12.20"
