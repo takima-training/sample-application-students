@@ -31,7 +31,7 @@ jobs:
         - cd sample-application-backend
       script:
         - echo "Docker build ..."
-        - docker-compose build
+        - docker-compose build -t trankilemil/tp02-java
         - echo "Docker login ..."
         - echo "$DOCKER_HUB_Password" | docker login -u "$DOCKER_HUB_Username" --password-stdin
         - echo "Docker push ..."
@@ -41,7 +41,7 @@ jobs:
         - cd sample-application-frontend
       script:
         - echo "Docker build ..."
-        - docker-compose build
+        - docker-compose build -t trankilemil/tp02-node
         - echo "Docker login ..."
         - echo "$DOCKER_HUB_Password" | docker login -u "$DOCKER_HUB_Username" --password-stdin
         - echo "Docker push ..."
