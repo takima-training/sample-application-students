@@ -1,15 +1,14 @@
 git:
   depth: 5
+
 jobs:
   include:
     - stage: "Build and Test Java"
-
       language: java
       jdk: oraclejdk11
       before_script:
         - cd sample-application-backend
     - stage: "Build and Test Nodejs"
-    
       language: node.js
       node_js: "12.20"
       before_script:
