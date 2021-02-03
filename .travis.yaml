@@ -9,6 +9,7 @@ jobs:
       before_script:
         - cd sample-application-backend
     - stage: "Build and Test Nodejs"
+    
       language: node.js
       node_js: "12.20"
       before_script:
