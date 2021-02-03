@@ -15,5 +15,5 @@ jobs:
         - cd sample-application-frontend
 cache:
   directories:
-    - "$HOME/.m2/repository"
-    - "$HOME/.npm"
+  - "$HOME/.m2/repository"
+  - "$HOME/.npm"
