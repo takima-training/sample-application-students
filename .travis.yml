@@ -12,7 +12,7 @@ jobs:
       language: java
       jdk: oraclejdk11
       before_script: 
-        - sample-application-backend
+        - cd sample-application-backend
       script:
         - echo "Maven build " 
         - mvn clean build
