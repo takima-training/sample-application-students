@@ -1,19 +1,54 @@
 git:
   depth: 5
 
+
+stages:
+- Build and Test
+- Package
+
 jobs:
   include:
-    - stage: Build and Test Java
+    - stage: Build and Test 
       language: java
       jdk: oraclejdk11
-      before_script:
-        - cd sample-application-backend
+      before_script: 
+        - sample-application-backend
+      script:
+        - echo "Maven build " 
+        - mvn clean build
+        - echo "run Test coverage and Quality Gate"
+        - mvn clean verify
 
-    - stage: Build and Test Nodejs
+    - stage: Build and Test
       language: node.js
       node_js: "12.20"
       before_script:
         - cd sample-application-frontend
+      script: 
+        - echo "NPM install and build"
+        - npm run test
+
+    - stage: Package
+      before_script:
+        - sample-application-backend
+      script:
+        - echo "Docker build sample-application-backend... "
+        - docker build -t kaisowaka/samplebackend .
+        - echo "Docker login ..."
+        - echo "$DOCKER_HUB_Password" | docker login -u "$DOCKER_HUB_Username" --password-stdin
+        - echo "Docker push sample-application-backend... "
+        - docker push  kaisowaka/samplebackend
+    - stage: Package
+      before_script :
+        - cd sample-application-frontend
+      script:
+        - echo "Docker build sample-application-frontend... "
+        - docker build -t kaisowaka/samplefrontend .
+        - echo "Docker login ..."
+        - echo "$DOCKER_HUB_Password" | docker login -u "$DOCKER_HUB_Username" --password-stdin
+        - echo "Docker push sample-application-frontend... "
+        - docker push  kaisowaka/samplebackend
+
 cache:
   directories:
   - "$HOME/.m2/repository"
