@@ -46,7 +46,7 @@ jobs:
         - echo "Docker login ..."
         - echo "$DOCKER_HUB_Password" | docker login -u "$DOCKER_HUB_Username" --password-stdin
         - echo "Docker push sample-application-frontend... "
-        - docker push  kaisowaka/samplebackend
+        - docker push  kaisowaka/samplefrontend
 
 cache:
   directories:
