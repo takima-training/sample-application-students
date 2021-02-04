@@ -15,9 +15,8 @@ jobs:
         - cd sample-application-backend
       script:
         - echo "Maven build " 
-        - mvn clean build
-        - echo "run Test coverage and Quality Gate"
         - mvn clean verify
+        - echo "run Test coverage and Quality Gate"
 
     - stage: Build and Test
       language: node.js
