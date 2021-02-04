@@ -19,7 +19,6 @@ jobs:
         - mvn clean verify
         - echo "run Test coverage and Quality Gate"
         - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=RaphaelFourel-fr_sample-application-students
-
     - stage: Build and Test
       language: node.js
       node_js: "12.20"
