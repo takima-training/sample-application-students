@@ -5,6 +5,7 @@ git:
 stages:
 - Build and Test
 - Package
+- Deploy
 
 
 jobs:
@@ -49,7 +50,17 @@ jobs:
         - echo "$DOCKER_HUB_Password" | docker login -u "$DOCKER_HUB_Username" --password-stdin
         - echo "Docker push sample-application-frontend... "
         - docker push  kaisowaka/samplefrontend
-        
+
+    - stage: Deploy
+      before_script:
+        - apt-get update
+        - apt-get install -y software-properties-common
+        - apt-add-repository --yes --update ppa:ansible/ansible
+        - apt-get install -y ansible
+      script:
+        ansible-playbook -i inventories/setup.yml playbook.yml
+
+
 cache:
   directories:
   - "$HOME/.m2/repository"
@@ -62,4 +73,3 @@ addons:
   sonarcloud:
     organization: "raphaelfourel-fr"
     token: "$SONARCLOUD_TOKEN"
-    
