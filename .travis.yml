@@ -30,7 +30,7 @@ jobs:
 
     - stage: Package
       before_script:
-        - sample-application-backend
+        - cd sample-application-backend
       script:
         - echo "Docker build sample-application-backend... "
         - docker build -t kaisowaka/samplebackend .
