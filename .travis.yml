@@ -5,6 +5,7 @@ git:
 stages:
 - Build and Test
 - Package
+- Quality
 
 jobs:
   include:
@@ -48,6 +49,11 @@ jobs:
         - echo "Docker push sample-application-frontend... "
         - docker push  kaisowaka/samplefrontend
 
+    - stage: Quality
+      language: java
+      script:
+        - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=RaphaelFourel-fr_sample-application-students
+         
 cache:
   directories:
   - "$HOME/.m2/repository"
@@ -55,3 +61,9 @@ cache:
 
 services:
   - docker
+
+
+addons:
+  sonarcloud:
+    organization: "raphaelfourel-fr"
+    token: "$SONARCLOUD_TOKEN"
