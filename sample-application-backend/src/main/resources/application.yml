@@ -12,6 +12,10 @@ spring:
     username: takima
     password: takimapass
 management:
+  metrics:
+    export:
+      prometheus:
+        enabled: true
   server:
     add-application-context-header: false
   endpoints:

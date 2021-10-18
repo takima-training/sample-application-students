@@ -9,7 +9,8 @@ import java.util.List;
 
 @Service
 public class StudentService {
-    private StudentDAO studentDAO;
+
+    private final StudentDAO studentDAO;
 
     @Autowired
     public StudentService(StudentDAO studentDAO) {
@@ -56,4 +57,5 @@ public class StudentService {
             throw new IllegalArgumentException("The student ID must be positive.");
         }
     }
+
 }

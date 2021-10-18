@@ -1,13 +1,12 @@
 package fr.takima.training.sampleapplication.IT;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -16,8 +15,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-@ExtendWith(SpringExtension.class)
-public class StudentControllerTestIT {
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+class StudentControllerTestIT {
 
     @Autowired
     private MockMvc mockMvc;
@@ -53,8 +52,8 @@ public class StudentControllerTestIT {
                 "    }\n" +
                 "}";
         mockMvc.perform(post("/api/students/")
-                .content(body)
-                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                        .content(body)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isCreated())
                 .andExpect(header().exists("location"));
     }
@@ -70,8 +69,8 @@ public class StudentControllerTestIT {
                 "    }\n" +
                 "}";
         mockMvc.perform(post("/api/students/")
-                .content(body)
-                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                        .content(body)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isBadRequest());
     }
 
@@ -83,8 +82,8 @@ public class StudentControllerTestIT {
                 "    }\n" +
                 "}";
         mockMvc.perform(post("/api/students/")
-                .content(body)
-                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                        .content(body)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isBadRequest());
     }
 
@@ -107,8 +106,8 @@ public class StudentControllerTestIT {
                 "    }\n" +
                 "}";
         mockMvc.perform(put("/api/students/11")
-                .content(body)
-                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                        .content(body)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("id", equalTo(11)))
                 .andExpect(jsonPath("firstname", equalTo("Francis")))
@@ -127,4 +126,5 @@ public class StudentControllerTestIT {
         mockMvc.perform(get("/api/students/1"))
                 .andExpect(status().isNotFound());
     }
+
 }

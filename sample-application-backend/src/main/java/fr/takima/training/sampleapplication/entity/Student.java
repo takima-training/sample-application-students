@@ -7,8 +7,9 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "students")
 public class Student {
+
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Size(max = 20)
@@ -97,5 +98,7 @@ public class Student {
             student.setDepartment(department);
             return student;
         }
+
     }
+
 }

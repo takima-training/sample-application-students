@@ -11,3 +11,16 @@ spring:
     url: "jdbc:postgresql://${embedded.postgresql.host}:${embedded.postgresql.port}/${embedded.postgresql.schema}"
     username: ${embedded.postgresql.user}
     password: ${embedded.postgresql.password}
+
+management:
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  server:
+    add-application-context-header: false
+  endpoints:
+    web:
+      base-path: /api/actuator
+      exposure:
+        include: health,info,env,metrics,beans,configprops,prometheus

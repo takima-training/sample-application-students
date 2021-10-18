@@ -1,6 +1,6 @@
 embedded:
   postgresql:
-    dockerImage: "postgres:12.0"
+    dockerImage: "postgres:13"
 
 logging:
   level:

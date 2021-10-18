@@ -1,5 +1,6 @@
 package fr.takima.training.sampleapplication.entity;
 
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -8,8 +9,9 @@ import java.util.List;
 @Entity
 @Table(name = "departments")
 public class Department {
+
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -63,5 +65,7 @@ public class Department {
             department.setName(name);
             return department;
         }
+
     }
+
 }
